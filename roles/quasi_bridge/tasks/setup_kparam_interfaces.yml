@@ -1,0 +1,20 @@
+---
+- ansible.builtin.template:
+    dest: /etc/network/if-pre-up.d/01routing
+    src: 01routing-if-pre-up.sh.j2
+    mode: 0755
+  become: true
+- ansible.posix.sysctl:
+    name: net.ipv4.conf.all.forwarding
+    value: '1'
+  become: true
+- ansible.posix.sysctl:
+    name: net.ipv4.conf.all.forwarding
+    value: '1'
+  become: true
+- ansible.builtin.template:
+    dest: /etc/dhcpcd.conf
+    src: dhcpcd.conf.j2
+    mode: 0664
+    group: netdev
+  become: true

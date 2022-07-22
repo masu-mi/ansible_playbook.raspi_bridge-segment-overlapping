@@ -1,0 +1,8 @@
+### Editing /etc/systemd/system/isc-dhcp-server.service.d/override.conf
+### Anything between here and the comment below will become the new contents of the file
+
+[Unit]
+After=network-online.target networking.service
+
+[Service]
+ExecStartPre=sleep {{ wired_dhcpd.startup_waiting_time }}

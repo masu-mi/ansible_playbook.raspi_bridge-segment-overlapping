@@ -1,0 +1,20 @@
+# dhcpd.conf
+#
+default-lease-time 600;
+max-lease-time 7200;
+ddns-update-style none;
+
+subnet {{ wired_ipv4_addr | ansible.utils.ipaddr('network') }} netmask {{ wired_ipv4_addr | ansible.utils.ipaddr('netmask') }} {
+  range {{ wired_dhcpd.pool.start }} {{ wired_dhcpd.pool.stop }};
+  option domain-name-servers {{ main_gw_addr | ansible.utils.ipaddr('address') }};
+  option domain-name "{{ wired_dhcpd.domain_name }}";
+  option routers {{ wired_ipv4_addr | ansible.utils.ipaddr('address') }};
+  default-lease-time 600;
+  max-lease-time 7200;
+}
+{% for name, pinned in wired_dhcpd.pinned_hosts.items() %}
+host {{ name }} {
+  hardware ethernet {{ pinned.mac_addr }};
+  fixed-address {{ pinned.ipv4_addr }};
+}
+{% endfor %}

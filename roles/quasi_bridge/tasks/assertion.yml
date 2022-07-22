@@ -1,0 +1,16 @@
+---
+- name: basic addr check
+  ansible.builtin.assert:
+    that:
+      - ansible_distribution == 'Debian'
+- name: basic addr check
+  ansible.builtin.assert:
+    that:
+        - wired_dhcpd.pool.start | ipaddr(wired_ipv4_addr | ipaddr('subnet'))
+        - wired_dhcpd.pool.stop  | ipaddr(wired_ipv4_addr | ipaddr('subnet'))
+        - wired_dhcpd.pool.stop  | ipaddr(wired_ipv4_addr | ipaddr('subnet'))
+- name: pinned addr check
+  ansible.builtin.assert:
+    that:
+        - item.value.ipv4_addr | ipaddr(wired_ipv4_addr | ipaddr('subnet'))
+  with_dict: "{{ wired_dhcpd.pinned_hosts | default([]) }}"

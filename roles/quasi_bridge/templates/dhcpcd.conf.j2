@@ -1,0 +1,28 @@
+# A sample configuration for dhcpcd.
+# See dhcpcd.conf(5) for details.
+
+# Allow users of this group to interact with dhcpcd via the control socket.
+#controlgroup wheel
+
+# Inform the DHCP server of our hostname for DDNS.
+hostname
+
+# Use the hardware address of the interface for the Client ID.
+clientid
+
+# Persist interface configuration when dhcpcd exits.
+persistent
+
+# Rapid commit support.
+option rapid_commit
+
+# A list of options to request from the DHCP server.
+option domain_name_servers, domain_name, domain_search, host_name
+option classless_static_routes
+option interface_mtu
+require dhcp_server_identifier
+
+slaac private
+
+interface {{ wired_interface }}
+static ip_address={{ wired_ipv4_addr }}

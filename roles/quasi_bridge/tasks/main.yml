@@ -1,0 +1,4 @@
+---
+- import_tasks: assertion.yml
+- import_tasks: setup_kparam_interfaces.yml
+- import_tasks: setup_dhcpd.yml

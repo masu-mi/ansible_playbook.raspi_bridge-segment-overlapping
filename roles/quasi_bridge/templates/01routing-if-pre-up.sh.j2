@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+/sbin/ip link set {{ main_interface }} promisc on
+sysctl -w net.ipv4.conf.{{ main_interface }}.proxy_arp=1 > /dev/null
