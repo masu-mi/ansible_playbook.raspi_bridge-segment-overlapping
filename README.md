@@ -1,16 +1,22 @@
 ansible_playbook.raspi_bridge-segment-overlapping
 ---
+This playbook offers pseudo L2 bridge for a wireles Wi-Fi router that doesn't support WDS bridging with configuring a Debian family server (e.g. Raspberry Pi).
 
-このプレイブックでは、WDS bridgingのないWi-Fiルーター配下に擬似的にL2スイッチを接続します。あらかじめ Wi-Fi接続が可能でssh接続可能なDebian系のホストを準備してください。また家庭用で、ネットワーク機器であるため勝手に再起動しません。設定後はターゲットにログインして再起動を行なってください。
+Premis: This playbook reuires following items to a target host.
+
+* Wi-Fi access configured to existing Wi-Fi router
+* ssh.service is running
+
+Note: Because the target is a home **network** device, the playbook don't execute auto reboot, please reboot the target after run the playbook.
 
 ![target network](images/target-network.png)
 
-## 使い方
+## Usage
 
-設定のカスタマイズは *./inventories/host.yml.example* や *.envrc.example*　を参考にしてください。
+If you want to customize parameters, please read *./inventories/host.yml.example*, *.envrc.example* files.
 
 ### setup (controller)
-必要な Ansible などを *poetry* でインストールします。
+You can setup controller node with poetry.
 
 ```sh
 poetry install
