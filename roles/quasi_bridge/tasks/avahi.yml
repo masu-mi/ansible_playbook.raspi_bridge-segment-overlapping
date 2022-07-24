@@ -1,0 +1,7 @@
+---
+- ansible.builtin.lineinfile:
+    path: /etc/avahi/avahi-daemon.conf
+    regexp: '^enable-reflector='
+    insertafter: '^#enable-reflector='
+    line: 'enable-reflector=yes'
+  become: true
