@@ -1,6 +1,6 @@
 ansible_playbook.raspi_bridge-segment-overlapping
 ---
-This playbook offers pseudo L2 bridge for a wireles Wi-Fi router that doesn't support WDS bridging with configuring a Debian family server (e.g. Raspberry Pi).
+This playbook offers a pseudo L2 bridge feature for a Wi-Fi router that doesn't support WDS bridging, configuring a Debian family server (e.g. Raspberry Pi).
 
 Premis: This playbook reuires following items to a target host.
 

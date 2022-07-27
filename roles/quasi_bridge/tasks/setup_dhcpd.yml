@@ -2,19 +2,31 @@
 - ansible.builtin.apt:
     pkg:
       - isc-dhcp-server
+  become: true
 - ansible.builtin.template:
     dest: /etc/dhcp/dhcpd.conf
     src: dhcpd.conf.j2
     mode: 0644
     group: netdev
   become: true
+- ansible.builtin.file:
+    path: /etc/systemd/system/isc-dhcp-server.service.d
+    state: directory
+    mode: 0644
+    group: root
+  become: true
 - ansible.builtin.template:
     dest: /etc/systemd/system/isc-dhcp-server.service.d/override.conf
     src: isc-dhcp-server.override.j2
     mode: 0664
-    group: netdev
+    group: root
   become: true
 - ansible.builtin.systemd:
     name: isc-dhcp-server.service
     enabled: yes
-    state: started
+- ansible.builtin.lineinfile:
+    path: /etc/default/isc-dhcp-server
+    regexp: '^INTERFACESv4='
+    insertafter: '^#INTERFACESv4='
+    line: 'INTERFACESv4="eth0"'
+  become: true
