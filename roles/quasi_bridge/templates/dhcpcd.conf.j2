@@ -24,5 +24,8 @@ require dhcp_server_identifier
 
 slaac private
 
+interface {{ main_interface }}
+static ip_address={{ main_ipv4_addr }}
+
 interface {{ wired_interface }}
 static ip_address={{ wired_ipv4_addr }}
