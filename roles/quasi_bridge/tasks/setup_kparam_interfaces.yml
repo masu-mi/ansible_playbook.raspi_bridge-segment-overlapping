@@ -6,9 +6,13 @@
     mode: 0755
   become: true
 - ansible.posix.sysctl:
-    name: net.ipv4.conf.all.forwarding
+    name: "{{ item }}"
     value: '1'
   become: true
+  with_items:
+    - net.ipv4.conf.all.forwarding
+    - net.ipv4.conf.all.bc_forwarding
+    - net.ipv6.conf.all.forwarding
 - name: set /etc/dhcpcd.conf
   ansible.builtin.template:
     dest: /etc/dhcpcd.conf

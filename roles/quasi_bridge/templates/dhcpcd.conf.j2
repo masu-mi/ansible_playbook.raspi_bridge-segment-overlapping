@@ -26,6 +26,7 @@ slaac private
 
 interface {{ main_interface }}
 static ip_address={{ main_ipv4_addr }}
+static routers={{ main_gw_addr | ipaddr('address') }}
 
 interface {{ wired_interface }}
 static ip_address={{ wired_ipv4_addr }}
