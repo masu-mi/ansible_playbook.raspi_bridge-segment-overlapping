@@ -1,8 +1,8 @@
 ---
-- name: set /etc/network/if-pre-up.d/01routing
+- name: set /etc/network/if-up.d/01routing
   ansible.builtin.template:
-    dest: /etc/network/if-pre-up.d/01routing
-    src: 01routing-if-pre-up.sh.j2
+    dest: /etc/network/if-up.d/01routing
+    src: 01routing-if-up.sh.j2
     mode: 0755
   become: true
 - ansible.posix.sysctl:
